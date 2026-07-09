@@ -13,10 +13,10 @@
     </parent>
 
     <groupId>com.cognizant</groupId>
-    <artifactId>account</artifactId>
+    <artifactId>eureka-discovery-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>account</name>
-    <description>Account Microservice</description>
+    <name>eureka-discovery-server</name>
+    <description>Eureka Discovery Server</description>
 
     <properties>
         <java.version>21</java.version>
@@ -25,20 +25,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
         <dependency>
