@@ -1,3 +1,4 @@
 <message>
-<text>Hello from MAIN branch - different content</text>
+    <text>Hello from MAIN branch - different content</text>
+    <text>Hello from GitWork branch</text>
 </message>
