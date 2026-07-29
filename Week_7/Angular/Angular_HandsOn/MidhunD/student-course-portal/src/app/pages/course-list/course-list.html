@@ -1,12 +1,28 @@
-<section class="page-card">
-    <h1>Available Courses</h1>
-
-    <div class="course-grid">
-        <app-course-card *ngFor="let c of courses" [course]="c" (enrollRequested)="onEnroll($event)">
-        </app-course-card>
+<section class="courses-page">
+    <div class="courses-header">
+        <p class="eyebrow">Student Learning Dashboard</p>
+        <h1>Available Courses</h1>
+        <p class="subtitle">
+            Choose a course, view its status, and enroll from one clean dashboard.
+        </p>
     </div>
 
-    <p class="selected" *ngIf="selectedCourseId">
+    <p class="loading-text" *ngIf="isLoading">Loading courses...</p>
+
+    <ng-container *ngIf="!isLoading">
+        <div class="course-grid" *ngIf="courses.length > 0; else noCourses">
+            <app-course-card appHighlight="#eff6ff"
+                *ngFor="let course of courses; let i = index; trackBy: trackByCourseId" [course]="course"
+                (enrollRequested)="onEnroll($event)">
+            </app-course-card>
+        </div>
+
+        <ng-template #noCourses>
+            <p class="empty-text">No courses available.</p>
+        </ng-template>
+    </ng-container>
+
+    <div class="selected-box" *ngIf="selectedCourseId">
         Selected course ID: {{ selectedCourseId }}
-    </p>
+    </div>
 </section>

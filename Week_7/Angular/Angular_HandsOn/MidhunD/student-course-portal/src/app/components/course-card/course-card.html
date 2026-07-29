@@ -1,8 +1,36 @@
-<div class="course-card">
-    <h2>{{ course.name }}</h2>
+<div class="course-card" [ngClass]="cardClasses" [ngStyle]="borderStyle">
+    <div class="card-top">
+        <div>
+            <p class="course-code">{{ course.code }}</p>
+            <h2>{{ course.name }}</h2>
+        </div>
 
-    <p><b>Code:</b> {{ course.code }}</p>
-    <p><b>Credits:</b> {{ course.credits }}</p>
+        <div [ngSwitch]="course.gradeStatus">
+            <span *ngSwitchCase="'passed'" class="badge passed">Passed</span>
+            <span *ngSwitchCase="'failed'" class="badge failed">Failed</span>
+            <span *ngSwitchCase="'pending'" class="badge pending">Pending</span>
+        </div>
+    </div>
 
-    <button (click)="enroll()">Enroll</button>
+    <div class="info-row">
+        <span>Credits</span>
+        <strong>{{ course.credits | creditLabel }}</strong>
+    </div>
+
+    <div class="info-row">
+        <span>Status</span>
+        <strong>{{ course.enrolled ? 'Enrolled' : 'Not enrolled' }}</strong>
+    </div>
+
+    <div class="button-row">
+        <button class="enroll-btn" (click)="enroll()">Enroll</button>
+
+        <button class="details-btn" (click)="toggleDetails()">
+            {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+        </button>
+    </div>
+
+    <p *ngIf="isExpanded" class="details">
+        This course is part of the Student Course Portal learning plan.
+    </p>
 </div>

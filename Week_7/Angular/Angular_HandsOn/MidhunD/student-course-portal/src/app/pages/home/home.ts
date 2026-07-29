@@ -23,6 +23,6 @@ export class Home implements OnInit, OnDestroy {
   }
 
   onEnrollClick(): void {
-    this.message = 'Enrollment opened!';
-  }
+  console.log('Enroll button clicked');
+}
 }
