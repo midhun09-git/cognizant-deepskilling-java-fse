@@ -5,6 +5,21 @@
         <p><b>Name:</b> Midhun D</p>
         <p><b>Department:</b> Electrical and Electronics Engineering</p>
         <p><b>Current GPA:</b> 3.8</p>
-        <p><b>Enrolled Courses:</b> 3</p>
+        <p><b>Enrolled Courses:</b> {{ enrolledCourses.length }}</p>
+    </div>
+
+    <div class="enrolled-section">
+        <h2>My Enrolled Courses</h2>
+
+        <div *ngIf="enrolledCourses.length === 0" class="empty">
+            No courses enrolled yet. Go to Courses and click Enroll.
+        </div>
+
+        <div class="enrolled-list" *ngIf="enrolledCourses.length > 0">
+            <div class="enrolled-card" *ngFor="let course of enrolledCourses">
+                <h3>{{ course.name }}</h3>
+                <p>{{ course.code }} • {{ course.credits || 'No' }} Credits</p>
+            </div>
+        </div>
     </div>
 </section>

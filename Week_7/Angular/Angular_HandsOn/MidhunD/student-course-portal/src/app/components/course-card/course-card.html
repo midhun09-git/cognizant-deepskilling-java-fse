@@ -19,18 +19,24 @@
 
     <div class="info-row">
         <span>Status</span>
-        <strong>{{ course.enrolled ? 'Enrolled' : 'Not enrolled' }}</strong>
+        <strong>{{ enrolled ? 'Enrolled' : 'Not enrolled' }}</strong>
     </div>
 
     <div class="button-row">
-        <button class="enroll-btn" (click)="enroll()">Enroll</button>
+        <button class="enroll-btn" (click)="enroll($event)">
+            {{ enrolled ? 'Unenroll' : 'Enroll' }}
+        </button>
 
-        <button class="details-btn" (click)="toggleDetails()">
-            {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+        <button class="details-btn" (click)="viewDetails($event)">
+            View Details
+        </button>
+
+        <button class="details-btn" (click)="toggleDetails($event)">
+            {{ isExpanded ? 'Hide' : 'Quick Info' }}
         </button>
     </div>
 
     <p *ngIf="isExpanded" class="details">
-        This course is part of the Student Course Portal learning plan.
+        {{ course.description }}
     </p>
 </div>

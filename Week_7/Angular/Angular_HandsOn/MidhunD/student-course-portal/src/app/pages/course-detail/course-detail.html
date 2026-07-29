@@ -1,0 +1,40 @@
+<section class="detail-page" *ngIf="course; else notFound">
+    <div class="detail-card">
+        <a routerLink="/courses" class="back-link">← Back to Courses</a>
+
+        <p class="course-code">{{ course.code }}</p>
+        <h1>{{ course.name }}</h1>
+
+        <p class="description">{{ course.description }}</p>
+
+        <div class="detail-grid">
+            <div>
+                <span>Credits</span>
+                <strong>{{ course.credits || 'No Credits' }}</strong>
+            </div>
+
+            <div>
+                <span>Grade Status</span>
+                <strong>{{ course.gradeStatus }}</strong>
+            </div>
+
+            <div>
+                <span>Enrollment</span>
+                <strong>{{ isEnrolled() ? 'Enrolled' : 'Not Enrolled' }}</strong>
+            </div>
+        </div>
+
+        <button (click)="toggleEnrollment()">
+            {{ isEnrolled() ? 'Unenroll' : 'Enroll' }}
+        </button>
+    </div>
+</section>
+
+<ng-template #notFound>
+    <section class="detail-page">
+        <div class="detail-card">
+            <h1>Course not found</h1>
+            <a routerLink="/courses">Go back to Courses</a>
+        </div>
+    </section>
+</ng-template>

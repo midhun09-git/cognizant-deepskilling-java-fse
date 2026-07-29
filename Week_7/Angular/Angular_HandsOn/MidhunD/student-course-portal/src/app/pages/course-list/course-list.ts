@@ -1,37 +1,67 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseCard } from '../../components/course-card/course-card';
+import { Course } from '../../models/course.model';
+import { CourseService } from '../../services/course';
+import { EnrollmentService } from '../../services/enrollment';
 import { Highlight } from '../../directives/highlight';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-course-list',
-  imports: [CommonModule, CourseCard, Highlight],
+  imports: [CommonModule, FormsModule, CourseCard, Highlight],
   templateUrl: './course-list.html',
   styleUrl: './course-list.css'
 })
-export class CourseList {
+export class CourseList implements OnInit {
   selectedCourseId: number | null = null;
-
-  // Keep false so courses display immediately
   isLoading = false;
+  searchTerm = '';
+  courses: Course[] = [];
 
-  courses = [
-    { id: 1, name: 'Java Full Stack', code: 'JFS101', credits: 4, gradeStatus: 'passed' as const, enrolled: false },
-    { id: 2, name: 'Angular Development', code: 'ANG201', credits: 3, gradeStatus: 'pending' as const, enrolled: false },
-    { id: 3, name: 'Database Management', code: 'DB301', credits: 3, gradeStatus: 'failed' as const, enrolled: false },
-    { id: 4, name: 'Spring Boot REST API', code: 'SB401', credits: 4, gradeStatus: 'passed' as const, enrolled: false },
-    { id: 5, name: 'Software Testing', code: 'ST501', credits: null, gradeStatus: 'pending' as const, enrolled: false }
-  ];
+  constructor(
+    private courseService: CourseService,
+    private enrollmentService: EnrollmentService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  trackByCourseId(index: number, course: any): number {
+  ngOnInit(): void {
+    this.searchTerm = this.route.snapshot.queryParamMap.get('search') || '';
+    this.courses = this.courseService.getCourses();
+  }
+
+  get filteredCourses(): Course[] {
+    if (!this.searchTerm.trim()) {
+      return this.courses;
+    }
+
+    return this.courses.filter(course =>
+      course.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      course.code.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  trackByCourseId(index: number, course: Course): number {
     return course.id;
+  }
+
+  onSearchChange(): void {
+    this.router.navigate(['/courses'], {
+      queryParams: this.searchTerm ? { search: this.searchTerm } : {}
+    });
+  }
+
+  isEnrolled(courseId: number): boolean {
+    return this.enrollmentService.isEnrolled(courseId);
   }
 
   onEnroll(courseId: number): void {
     this.selectedCourseId = courseId;
+    this.enrollmentService.toggleEnrollment(courseId);
+  }
 
-    this.courses = this.courses.map(course =>
-      course.id === courseId ? { ...course, enrolled: true } : course
-    );
+  openDetails(courseId: number): void {
+    this.router.navigate(['/courses', courseId]);
   }
 }

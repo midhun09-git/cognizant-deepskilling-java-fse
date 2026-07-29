@@ -5,20 +5,25 @@
         <p class="subtitle">
             Choose a course, view its status, and enroll from one clean dashboard.
         </p>
+
+        <div class="search-panel">
+            <input type="text" placeholder="Search by course name or code" [(ngModel)]="searchTerm"
+                (input)="onSearchChange()">
+        </div>
     </div>
 
     <p class="loading-text" *ngIf="isLoading">Loading courses...</p>
 
     <ng-container *ngIf="!isLoading">
-        <div class="course-grid" *ngIf="courses.length > 0; else noCourses">
-            <app-course-card appHighlight="#eff6ff"
-                *ngFor="let course of courses; let i = index; trackBy: trackByCourseId" [course]="course"
-                (enrollRequested)="onEnroll($event)">
+        <div class="course-grid" *ngIf="filteredCourses.length > 0; else noCourses">
+            <app-course-card appHighlight="#eff6ff" *ngFor="let course of filteredCourses; trackBy: trackByCourseId"
+                [course]="course" [enrolled]="isEnrolled(course.id)" (enrollRequested)="onEnroll($event)"
+                (viewRequested)="openDetails($event)">
             </app-course-card>
         </div>
 
         <ng-template #noCourses>
-            <p class="empty-text">No courses available.</p>
+            <p class="empty-text">No courses found.</p>
         </ng-template>
     </ng-container>
 

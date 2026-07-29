@@ -1,0 +1,73 @@
+.detail-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.detail-card {
+    width: 850px;
+    background: white;
+    padding: 45px;
+    border-radius: 28px;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.16);
+}
+
+.back-link {
+    color: #2563eb;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.course-code {
+    margin-top: 30px;
+    color: #64748b;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 42px;
+    color: #0f172a;
+}
+
+.description {
+    color: #475569;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 35px 0;
+}
+
+.detail-grid div {
+    background: #f8fafc;
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+}
+
+.detail-grid span {
+    display: block;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.detail-grid strong {
+    color: #0f172a;
+    font-size: 20px;
+}
+
+button {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}

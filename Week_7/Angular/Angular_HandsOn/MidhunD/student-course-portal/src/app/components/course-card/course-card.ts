@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Course } from '../../models/course.model';
 import { CreditLabelPipe } from '../../pipes/credit-label-pipe';
 
 @Component({
@@ -9,16 +10,11 @@ import { CreditLabelPipe } from '../../pipes/credit-label-pipe';
   styleUrl: './course-card.css'
 })
 export class CourseCard implements OnChanges {
-  @Input() course!: {
-    id: number;
-    name: string;
-    code: string;
-    credits: number | null;
-    gradeStatus: 'passed' | 'failed' | 'pending';
-    enrolled?: boolean;
-  };
+  @Input() course!: Course;
+  @Input() enrolled = false;
 
   @Output() enrollRequested = new EventEmitter<number>();
+  @Output() viewRequested = new EventEmitter<number>();
 
   isExpanded = false;
 
@@ -27,9 +23,8 @@ export class CourseCard implements OnChanges {
   }
 
   get cardClasses() {
-    // Getter keeps template clean by moving class logic into TypeScript.
     return {
-      'card--enrolled': this.course.enrolled,
+      'card--enrolled': this.enrolled,
       'card--full': this.course.credits !== null && this.course.credits >= 4,
       expanded: this.isExpanded
     };
@@ -47,11 +42,18 @@ export class CourseCard implements OnChanges {
     return { 'border-left': '6px solid grey' };
   }
 
-  enroll(): void {
+  enroll(event: Event): void {
+    event.stopPropagation();
     this.enrollRequested.emit(this.course.id);
   }
 
-  toggleDetails(): void {
+  viewDetails(event: Event): void {
+    event.stopPropagation();
+    this.viewRequested.emit(this.course.id);
+  }
+
+  toggleDetails(event: Event): void {
+    event.stopPropagation();
     this.isExpanded = !this.isExpanded;
   }
 }

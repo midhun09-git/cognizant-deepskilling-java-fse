@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CourseService } from '../../services/course';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,13 @@ import { FormsModule } from '@angular/forms';
 export class Home implements OnInit, OnDestroy {
   portalName = 'Student Course Portal';
   isPortalActive = true;
-  message = '';
   searchTerm = '';
-  availableCourses = 12;
+
+  constructor(private courseService: CourseService) {}
+
+  get availableCourses(): number {
+    return this.courseService.getCoursesCount();
+  }
 
   ngOnInit(): void {
     console.log('HomeComponent initialised — courses loaded');
@@ -23,6 +28,6 @@ export class Home implements OnInit, OnDestroy {
   }
 
   onEnrollClick(): void {
-  console.log('Enroll button clicked');
-}
+    console.log('Enroll button clicked');
+  }
 }
