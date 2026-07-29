@@ -2,22 +2,11 @@
     <h1>Available Courses</h1>
 
     <div class="course-grid">
-        <div class="course-card">
-            <h2>Java Full Stack</h2>
-            <p>Learn Java, Spring Boot, REST API, and database concepts.</p>
-            <span>Credits: 4</span>
-        </div>
-
-        <div class="course-card">
-            <h2>Angular Development</h2>
-            <p>Learn components, routing, forms, services, and HTTP.</p>
-            <span>Credits: 3</span>
-        </div>
-
-        <div class="course-card">
-            <h2>Database Management</h2>
-            <p>Learn SQL, joins, normalization, and transactions.</p>
-            <span>Credits: 3</span>
-        </div>
+        <app-course-card *ngFor="let c of courses" [course]="c" (enrollRequested)="onEnroll($event)">
+        </app-course-card>
     </div>
+
+    <p class="selected" *ngIf="selectedCourseId">
+        Selected course ID: {{ selectedCourseId }}
+    </p>
 </section>

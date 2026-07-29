@@ -1,14 +1,30 @@
 <section class="hero">
-    <h1>Welcome to Student Course Portal</h1>
+    <h1>Welcome to {{ portalName }}</h1>
 
     <p>
         This portal helps students view courses, enroll, check grades,
         and manage their profile.
     </p>
 
+    <button [disabled]="!isPortalActive" (click)="onEnrollClick()">
+        Enroll Now
+    </button>
+
+    <p class="message">{{ message }}</p>
+
+    <div class="search-box">
+        <label>Search Course: </label>
+
+        <!-- [property] is one-way binding: component to DOM.
+         [(ngModel)] is two-way binding: DOM to component and component to DOM. -->
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Enter course name">
+
+        <p>Searching for: {{ searchTerm }}</p>
+    </div>
+
     <div class="stats-container">
         <div class="stat-card">
-            <h2>12</h2>
+            <h2>{{ availableCourses }}</h2>
             <p>Courses Available</p>
         </div>
 

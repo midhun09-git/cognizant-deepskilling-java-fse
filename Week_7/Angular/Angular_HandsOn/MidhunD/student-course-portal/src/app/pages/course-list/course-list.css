@@ -1,32 +1,28 @@
 .page-card {
-    background: #f8fafc;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 50px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
 }
 
 .page-card h1 {
     text-align: center;
+    font-size: 38px;
     color: #0f172a;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .course-grid {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.course-card {
-    background: white;
-    width: 280px;
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-.course-card h2 {
-    color: #2563eb;
+.selected {
+    margin-top: 30px;
+    text-align: center;
+    color: #16a34a;
+    font-size: 20px;
+    font-weight: 700;
 }
