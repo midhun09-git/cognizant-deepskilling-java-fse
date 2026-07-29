@@ -1,0 +1,32 @@
+.page-card {
+    background: #f8fafc;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.page-card h1 {
+    text-align: center;
+    color: #0f172a;
+    margin-bottom: 30px;
+}
+
+.course-grid {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    background: white;
+    width: 280px;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.course-card h2 {
+    color: #2563eb;
+}
